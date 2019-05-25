@@ -1,7 +1,6 @@
 from boundary import Boundary
 from car import Car
 from checkpoint import Checkpoint
-from particle import Particle
 import pygame
 import random
 
@@ -114,8 +113,6 @@ checkpoints.append(Checkpoint(164, 636, 249, 575, 25))
 checkpoints.append(Checkpoint(70, 465, 186, 466, 26))
 checkpoints.append(Checkpoint(126, 318, 214, 319, 27))
 
-particle = Particle(500, 500, 10)
-
 c = Car(150, 190, 270)
 
 px = 0
@@ -158,13 +155,9 @@ while not GAME_QUIT:
     for checkpoint in checkpoints:
         checkpoint.show(GAME_SURFACE)
 
-    particle.cast(GAME_SURFACE, walls)
-
     c.update(keys)
     c.show(GAME_SURFACE)
-
-    particle.position_at(pygame.mouse.get_pos())
-    # particle.show(GAME_SURFACE)
+    c.cast(GAME_SURFACE, walls)
 
     pygame.display.update()
     CLOCK.tick(60)

@@ -8,6 +8,7 @@ class Ray:
 
     def __init__(self, x1, y1, a):
         self.position = (x1, y1)
+        self.angle = a
         x_part = math.cos(2 * math.pi * a / 360)
         y_part = math.sin(2 * math.pi * a / 360)
         self.direction = (x_part, y_part)
@@ -18,8 +19,15 @@ class Ray:
         pygame.draw.line(surface, WHITE, self.position, endpos)
 
     def look_at_angle(self, angle):
+        self.angle = angle
         x_part = math.cos(2 * math.pi * angle / 360)
         y_part = math.sin(2 * math.pi * angle / 360)
+        self.direction = (x_part, y_part)
+
+    def update_angle(self, angle):
+        self.angle = self.angle + angle
+        x_part = math.cos(2 * math.pi * self.angle / 360)
+        y_part = math.sin(2 * math.pi * self.angle / 360)
         self.direction = (x_part, y_part)
 
     def position_at(self, pos):
