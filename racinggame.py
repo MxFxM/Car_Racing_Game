@@ -1,4 +1,5 @@
 from boundary import Boundary
+from checkpoint import Checkpoint
 from particle import Particle
 import pygame
 import random
@@ -82,6 +83,36 @@ walls.append(Boundary(249, 575, 186, 466))
 walls.append(Boundary(186, 466, 214, 319))
 walls.append(Boundary(214, 319, 200, 200))
 
+checkpoints = []
+checkpoints.append(Checkpoint(100, 200, 200, 200, 0))
+checkpoints.append(Checkpoint(100, 180, 200, 180, 1))
+checkpoints.append(Checkpoint(100, 100, 186, 137, 2))
+checkpoints.append(Checkpoint(200, 50, 221, 120, 3))
+checkpoints.append(Checkpoint(415, 90, 424, 165, 4))
+checkpoints.append(Checkpoint(531, 20, 525, 92, 5))
+checkpoints.append(Checkpoint(622, 73, 553, 116, 6))
+checkpoints.append(Checkpoint(591, 220, 540, 186, 7))
+checkpoints.append(Checkpoint(405, 262, 323, 207, 8))
+checkpoints.append(Checkpoint(322, 367, 239, 375, 9))
+checkpoints.append(Checkpoint(458, 475, 455, 557, 10))
+checkpoints.append(Checkpoint(563, 350, 616, 445, 11))
+checkpoints.append(Checkpoint(713, 287, 802, 330, 12))
+checkpoints.append(Checkpoint(867, 62, 914, 172, 13))
+checkpoints.append(Checkpoint(1120, 118, 1061, 179, 14))
+checkpoints.append(Checkpoint(1242, 325, 1100, 284, 15))
+checkpoints.append(Checkpoint(1057, 416, 956, 378, 16))
+checkpoints.append(Checkpoint(1067, 479, 984, 508, 17))
+checkpoints.append(Checkpoint(1253, 559, 1152, 606, 18))
+checkpoints.append(Checkpoint(1249, 643, 1152, 634, 19))
+checkpoints.append(Checkpoint(1109, 700, 1061, 645, 20))
+checkpoints.append(Checkpoint(882, 692, 959, 620, 21))
+checkpoints.append(Checkpoint(833, 584, 893, 526, 22))
+checkpoints.append(Checkpoint(657, 577, 616, 529, 23))
+checkpoints.append(Checkpoint(497, 671, 473, 602, 24))
+checkpoints.append(Checkpoint(164, 636, 249, 575, 25))
+checkpoints.append(Checkpoint(70, 465, 186, 466, 26))
+checkpoints.append(Checkpoint(126, 318, 214, 319, 27))
+
 particle = Particle(500, 500, 10)
 
 px = 0
@@ -107,6 +138,9 @@ while not GAME_QUIT:
 
     for wall in walls:
         wall.show(GAME_SURFACE)
+
+    for checkpoint in checkpoints:
+        checkpoint.show(GAME_SURFACE)
 
     particle.cast(GAME_SURFACE, walls)
 
