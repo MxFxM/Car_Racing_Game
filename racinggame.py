@@ -152,8 +152,8 @@ while not GAME_QUIT:
     for wall in walls:
         wall.show(GAME_SURFACE)
 
-    for checkpoint in checkpoints:
-        checkpoint.show(GAME_SURFACE)
+    # for checkpoint in checkpoints:
+    #    checkpoint.show(GAME_SURFACE)
 
     c.update(keys)
     c.show(GAME_SURFACE)
