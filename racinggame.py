@@ -1,4 +1,5 @@
 from boundary import Boundary
+from car import Car
 from checkpoint import Checkpoint
 from particle import Particle
 import pygame
@@ -115,6 +116,8 @@ checkpoints.append(Checkpoint(126, 318, 214, 319, 27))
 
 particle = Particle(500, 500, 10)
 
+c = Car(150, 190, 270)
+
 px = 0
 py = 0
 
@@ -130,20 +133,20 @@ while not GAME_QUIT:
         elif event.type == pygame.KEYDOWN:
             if event.key == 273:  # up
                 keys[0] = True
-            elif event.key == 273:  # down
+            elif event.key == 274:  # down
                 keys[1] = True
-            elif event.key == 273:  # left
+            elif event.key == 276:  # left
                 keys[2] = True
-            elif event.key == 273:  # right
+            elif event.key == 275:  # right
                 keys[3] = True
         elif event.type == pygame.KEYUP:
             if event.key == 273:  # up
                 keys[0] = False
-            elif event.key == 273:  # down
+            elif event.key == 274:  # down
                 keys[1] = False
-            elif event.key == 273:  # left
+            elif event.key == 276:  # left
                 keys[2] = False
-            elif event.key == 273:  # right
+            elif event.key == 275:  # right
                 keys[3] = False
         else:
             # print(event)
@@ -156,6 +159,9 @@ while not GAME_QUIT:
         checkpoint.show(GAME_SURFACE)
 
     particle.cast(GAME_SURFACE, walls)
+
+    c.update(keys)
+    c.show(GAME_SURFACE)
 
     particle.position_at(pygame.mouse.get_pos())
     # particle.show(GAME_SURFACE)
