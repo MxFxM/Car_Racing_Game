@@ -1,0 +1,107 @@
+from boundary import Boundary
+from checkpoint import Checkpoint
+import pygame
+
+WHITE = (255, 255, 255)
+
+
+class Map:
+    def __init__(self):
+        self.walls = []
+
+        # Outer boundaries
+        self.walls.append(Boundary(100, 200, 100, 180))
+        self.walls.append(Boundary(100, 180, 100, 100))
+        self.walls.append(Boundary(100, 100, 200, 50))
+        self.walls.append(Boundary(200, 50, 415, 90))
+        self.walls.append(Boundary(415, 90, 531, 20))
+        self.walls.append(Boundary(531, 20, 622, 73))
+        self.walls.append(Boundary(622, 73, 591, 220))
+        self.walls.append(Boundary(591, 220, 405, 262))
+        self.walls.append(Boundary(405, 262, 322, 367))
+        self.walls.append(Boundary(322, 367, 458, 475))
+        self.walls.append(Boundary(458, 475, 563, 350))
+        self.walls.append(Boundary(563, 350, 713, 287))
+        self.walls.append(Boundary(713, 287, 867, 62))
+        self.walls.append(Boundary(867, 62, 1120, 118))
+        self.walls.append(Boundary(1120, 118, 1242, 325))
+        self.walls.append(Boundary(1242, 325, 1057, 416))
+        self.walls.append(Boundary(1057, 416, 1067, 479))
+        self.walls.append(Boundary(1067, 479, 1253, 559))
+        self.walls.append(Boundary(1253, 559, 1249, 643))
+        self.walls.append(Boundary(1249, 643, 1109, 700))
+        self.walls.append(Boundary(1109, 700, 882, 692))
+        self.walls.append(Boundary(882, 692, 833, 584))
+        self.walls.append(Boundary(833, 584, 657, 577))
+        self.walls.append(Boundary(657, 577, 497, 671))
+        self.walls.append(Boundary(497, 671, 164, 636))
+        self.walls.append(Boundary(164, 636, 70, 465))
+        self.walls.append(Boundary(70, 465, 126, 318))
+        self.walls.append(Boundary(126, 318, 100, 200))
+        # Inner boundaries
+        self.walls.append(Boundary(200, 200, 200, 180))
+        self.walls.append(Boundary(200, 180, 186, 137))
+        self.walls.append(Boundary(186, 137, 221, 120))
+        self.walls.append(Boundary(221, 120, 424, 165))
+        self.walls.append(Boundary(424, 165, 525, 92))
+        self.walls.append(Boundary(525, 92, 553, 116))
+        self.walls.append(Boundary(553, 116, 540, 186))
+        self.walls.append(Boundary(540, 186, 323, 207))
+        self.walls.append(Boundary(323, 207, 239, 375))
+        self.walls.append(Boundary(239, 375, 455, 557))
+        self.walls.append(Boundary(455, 557, 616, 445))
+        self.walls.append(Boundary(616, 445, 802, 330))
+        self.walls.append(Boundary(802, 330, 914, 172))
+        self.walls.append(Boundary(914, 172, 1061, 179))
+        self.walls.append(Boundary(1061, 179, 1100, 284))
+        self.walls.append(Boundary(1100, 284, 956, 378))
+        self.walls.append(Boundary(956, 378, 984, 508))
+        self.walls.append(Boundary(984, 508, 1152, 606))
+        self.walls.append(Boundary(1152, 606, 1152, 634))
+        self.walls.append(Boundary(1152, 634, 1061, 645))
+        self.walls.append(Boundary(1061, 645, 959, 620))
+        self.walls.append(Boundary(959, 620, 893, 526))
+        self.walls.append(Boundary(893, 526, 616, 529))
+        self.walls.append(Boundary(616, 529, 473, 602))
+        self.walls.append(Boundary(473, 602, 249, 575))
+        self.walls.append(Boundary(249, 575, 186, 466))
+        self.walls.append(Boundary(186, 466, 214, 319))
+        self.walls.append(Boundary(214, 319, 200, 200))
+
+        self.checkpoints = []
+        self.checkpoints.append(Checkpoint(100, 200, 200, 200, 0))
+        self.checkpoints.append(Checkpoint(100, 180, 200, 180, 1))
+        self.checkpoints.append(Checkpoint(100, 100, 186, 137, 2))
+        self.checkpoints.append(Checkpoint(200, 50, 221, 120, 3))
+        self.checkpoints.append(Checkpoint(415, 90, 424, 165, 4))
+        self.checkpoints.append(Checkpoint(531, 20, 525, 92, 5))
+        self.checkpoints.append(Checkpoint(622, 73, 553, 116, 6))
+        self.checkpoints.append(Checkpoint(591, 220, 540, 186, 7))
+        self.checkpoints.append(Checkpoint(405, 262, 323, 207, 8))
+        self.checkpoints.append(Checkpoint(322, 367, 239, 375, 9))
+        self.checkpoints.append(Checkpoint(458, 475, 455, 557, 10))
+        self.checkpoints.append(Checkpoint(563, 350, 616, 445, 11))
+        self.checkpoints.append(Checkpoint(713, 287, 802, 330, 12))
+        self.checkpoints.append(Checkpoint(867, 62, 914, 172, 13))
+        self.checkpoints.append(Checkpoint(1120, 118, 1061, 179, 14))
+        self.checkpoints.append(Checkpoint(1242, 325, 1100, 284, 15))
+        self.checkpoints.append(Checkpoint(1057, 416, 956, 378, 16))
+        self.checkpoints.append(Checkpoint(1067, 479, 984, 508, 17))
+        self.checkpoints.append(Checkpoint(1253, 559, 1152, 606, 18))
+        self.checkpoints.append(Checkpoint(1249, 643, 1152, 634, 19))
+        self.checkpoints.append(Checkpoint(1109, 700, 1061, 645, 20))
+        self.checkpoints.append(Checkpoint(882, 692, 959, 620, 21))
+        self.checkpoints.append(Checkpoint(833, 584, 893, 526, 22))
+        self.checkpoints.append(Checkpoint(657, 577, 616, 529, 23))
+        self.checkpoints.append(Checkpoint(497, 671, 473, 602, 24))
+        self.checkpoints.append(Checkpoint(164, 636, 249, 575, 25))
+        self.checkpoints.append(Checkpoint(70, 465, 186, 466, 26))
+        self.checkpoints.append(Checkpoint(126, 318, 214, 319, 27))
+
+    def show_walls(self, gs):
+        for wall in self.walls:
+            wall.show(gs)
+
+    def show_checkpoints(self, gs):
+        for checkpoint in self.checkpoints:
+            checkpoint.show(gs)
