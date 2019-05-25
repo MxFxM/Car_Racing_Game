@@ -118,6 +118,8 @@ particle = Particle(500, 500, 10)
 px = 0
 py = 0
 
+keys = [False, False, False, False]  # up, down, left, right
+
 while not GAME_QUIT:
 
     GAME_SURFACE.blit(BACKGROUND, (0, 0))
@@ -125,13 +127,24 @@ while not GAME_QUIT:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             GAME_QUIT = True
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            m = pygame.mouse.get_pos()
-            mx = m[0]
-            my = m[1]
-            print(f"walls.append(Boundary({px}, {py}, {mx}, {my}))")
-            px = mx
-            py = my
+        elif event.type == pygame.KEYDOWN:
+            if event.key == 273:  # up
+                keys[0] = True
+            elif event.key == 273:  # down
+                keys[1] = True
+            elif event.key == 273:  # left
+                keys[2] = True
+            elif event.key == 273:  # right
+                keys[3] = True
+        elif event.type == pygame.KEYUP:
+            if event.key == 273:  # up
+                keys[0] = False
+            elif event.key == 273:  # down
+                keys[1] = False
+            elif event.key == 273:  # left
+                keys[2] = False
+            elif event.key == 273:  # right
+                keys[3] = False
         else:
             # print(event)
             pass
