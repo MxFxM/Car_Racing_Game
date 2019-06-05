@@ -46,10 +46,6 @@ while not GAME_QUIT:
     test_population.show(GAME_SURFACE)
     # cast was moved to popultaion update
 
-    # c.update(keys)
-    # c.show(GAME_SURFACE)
-    # c.cast(GAME_SURFACE, mymap.walls)
-
     pygame.display.update()
     CLOCK.tick(60)
 
