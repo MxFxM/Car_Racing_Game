@@ -57,7 +57,7 @@ while not GAME_QUIT:
         #    pass
 
     mymap.show_walls(GAME_SURFACE)
-    # mymap.show_checkpoints(GAME_SURFACE)
+    mymap.show_checkpoints(GAME_SURFACE)
 
     c.update(keys)
     c.show(GAME_SURFACE)
