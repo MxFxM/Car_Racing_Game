@@ -1,4 +1,4 @@
-from car import Car
+from population import Population
 from map import Map
 import pygame
 import random
@@ -23,7 +23,8 @@ BACKGROUND.fill(BLACK)
 GAME_QUIT = False
 
 mymap = Map()
-c = Car(150, 190, 270)
+test_population = Population(10)
+# c = Car(150, 190, 270)
 
 keys = [False, False, False, False]  # up, down, left, right
 
@@ -34,24 +35,6 @@ while not GAME_QUIT:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             GAME_QUIT = True
-        elif event.type == pygame.KEYDOWN:
-            if event.key == 273:  # up
-                keys[0] = True
-            elif event.key == 274:  # down
-                keys[1] = True
-            elif event.key == 276:  # left
-                keys[2] = True
-            elif event.key == 275:  # right
-                keys[3] = True
-        elif event.type == pygame.KEYUP:
-            if event.key == 273:  # up
-                keys[0] = False
-            elif event.key == 274:  # down
-                keys[1] = False
-            elif event.key == 276:  # left
-                keys[2] = False
-            elif event.key == 275:  # right
-                keys[3] = False
         # else:
         #    print(event)
         #    pass
@@ -59,9 +42,13 @@ while not GAME_QUIT:
     mymap.show_walls(GAME_SURFACE)
     mymap.show_checkpoints(GAME_SURFACE)
 
-    c.update(keys)
-    c.show(GAME_SURFACE)
-    c.cast(GAME_SURFACE, mymap.walls)
+    test_population.update(GAME_SURFACE, mymap.walls)
+    test_population.show(GAME_SURFACE)
+    # cast was moved to popultaion update
+
+    # c.update(keys)
+    # c.show(GAME_SURFACE)
+    # c.cast(GAME_SURFACE, mymap.walls)
 
     pygame.display.update()
     CLOCK.tick(60)

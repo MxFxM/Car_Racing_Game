@@ -1,12 +1,15 @@
 from ray import Ray
+from brain import Brain
 import pygame
 import math
+import numpy as np
 
 
 BLUE = (0, 0, 255)
+RED = (255, 0, 0)
 
 
-class Car:
+class AiCar:
     def __init__(self, x1, y1, a):
         self.position = (x1, y1)
         x_part = math.cos(2 * math.pi * a / 360)
@@ -19,16 +22,27 @@ class Car:
         self.rays.append(Ray(self.position[0], self.position[1], 270))
         self.rays.append(Ray(self.position[0], self.position[1], 300))
         self.rays.append(Ray(self.position[0], self.position[1], 240))
-        self.rays.append(Ray(self.position[0], self.position[1], 0))
-        self.rays.append(Ray(self.position[0], self.position[1], 180))
-        self.rays.append(Ray(self.position[0], self.position[1], 70))
-        self.rays.append(Ray(self.position[0], self.position[1], 110))
+        self.rays.append(Ray(self.position[0], self.position[1], 50))
+        self.rays.append(Ray(self.position[0], self.position[1], 130))
+        self.brain = Brain()
+        self.dead = False
+        self.stuck = False
 
     def show(self, surface):
         pos = (round(self.position[0]), round(self.position[1]))
-        pygame.draw.circle(surface, BLUE, pos, 5)
+        if not self.dead and not self.stuck:
+            pygame.draw.circle(surface, BLUE, pos, 5)
+        else:
+            pygame.draw.circle(surface, RED, pos, 5)
+
+    def mydist(self, pos1, pos2):
+        dist = math.sqrt((pos1[0]-pos2[0])**2+(pos1[1]-pos2[1])**2)
+        if dist < 2:
+            self.dead = True
+        return dist
 
     def cast(self, gs, walls):
+        distances = []
         for ray in self.rays:
             closest_dist = math.inf
             closest_point = False
@@ -42,8 +56,26 @@ class Car:
                         closest_point = point
             if closest_point:
                 pygame.draw.line(gs, BLUE, self.position, closest_point)
+                distances.append(self.mydist(self.position, closest_point))
+            else:
+                distances.append(0)
+        # print(np.array(distances))
+        return np.array(distances)
 
-    def update(self, keys):
+    def debugKeys(self, keys):
+        if keys[0] and keys[1]:  # up and down has no action
+            keys[0] = 0
+            keys[1] = 0
+        if keys[2] and keys[3]:  # left and right has no action
+            keys[2] = 0
+            keys[3] = 0
+        if keys == [0, 0, 0, 0]:
+            self.stuck = True
+        return keys
+
+    def drive(self, dists):
+        keys = self.brain.predict(dists)
+        keys = self.debugKeys(keys)
         oa = self.angle
         if keys[2]:
             self.angle = self.angle - self.angle_vel
