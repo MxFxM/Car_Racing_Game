@@ -42,12 +42,13 @@ while not GAME_QUIT:
     mymap.show_walls(GAME_SURFACE)
     mymap.show_checkpoints(GAME_SURFACE)
 
-    test_population.update(GAME_SURFACE, mymap.walls)
+    test_population.update(GAME_SURFACE, mymap.walls, mymap.checkpoints)
     test_population.show(GAME_SURFACE)
 
     if test_population.done():
+        test_population.calculatefitness()
         test_population.selection()
-        test_population.creation()
+        test_population.mutation()
     # cast was moved to popultaion update
 
     pygame.display.update()

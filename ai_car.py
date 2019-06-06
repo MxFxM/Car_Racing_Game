@@ -7,6 +7,7 @@ import numpy as np
 
 BLUE = (0, 0, 255)
 RED = (255, 0, 0)
+GREEN = (0, 255, 0)
 
 
 class AiCar:
@@ -27,11 +28,16 @@ class AiCar:
         self.brain = Brain()
         self.dead = False
         self.stuck = False
+        self.isBest = False
+        self.score = 0
 
     def show(self, surface):
         pos = (round(self.position[0]), round(self.position[1]))
         if not self.dead and not self.stuck:
-            pygame.draw.circle(surface, BLUE, pos, 5)
+            if not self.isBest:
+                pygame.draw.circle(surface, BLUE, pos, 5)
+            else:
+                pygame.draw.circle(surface, GREEN, pos, 5)
         else:
             pygame.draw.circle(surface, RED, pos, 5)
 
@@ -40,6 +46,23 @@ class AiCar:
         if dist < 2:
             self.dead = True
         return dist
+
+    def score_points(self, checkpoints):
+        for ray in self.rays:
+            closest_dist = math.inf
+            closest_point = False
+            # first checkpoint has value 1
+            for s, wall in enumerate(checkpoints, 1):
+                point = ray.cast(wall)
+                if point:
+                    dist = math.sqrt((point[0] - self.position[0])**2
+                                     + (point[1] - self.position[1])**2)
+                    if dist < closest_dist:
+                        closest_dist = dist
+                        closest_point = point
+                    if dist < 5:
+                        if self.score == s-1:
+                            self.score = s
 
     def cast(self, gs, walls):
         distances = []
