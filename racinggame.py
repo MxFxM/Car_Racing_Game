@@ -23,7 +23,7 @@ BACKGROUND.fill(BLACK)
 GAME_QUIT = False
 
 mymap = Map()
-test_population = Population(10)
+test_population = Population(100, 10, 10)
 # c = Car(150, 190, 270)
 
 keys = [False, False, False, False]  # up, down, left, right
@@ -44,6 +44,10 @@ while not GAME_QUIT:
 
     test_population.update(GAME_SURFACE, mymap.walls)
     test_population.show(GAME_SURFACE)
+
+    if test_population.done():
+        test_population.selection()
+        test_population.creation()
     # cast was moved to popultaion update
 
     pygame.display.update()
