@@ -17,7 +17,7 @@ class AiCar:
         y_part = math.sin(2 * math.pi * a / 360)
         self.direction = (x_part, y_part)
         self.angle = a
-        self.vel = 3
+        self.vel = 2
         self.angle_vel = 3
         self.rays = []
         self.rays.append(Ray(self.position[0], self.position[1], 270))
@@ -78,7 +78,7 @@ class AiCar:
                         closest_dist = dist
                         closest_point = point
             if closest_point:
-                pygame.draw.line(gs, BLUE, self.position, closest_point)
+                #pygame.draw.line(gs, BLUE, self.position, closest_point)
                 distances.append(self.mydist(self.position, closest_point))
             else:
                 distances.append(0)
