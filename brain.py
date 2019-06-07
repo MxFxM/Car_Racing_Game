@@ -47,7 +47,7 @@ class Brain:
         return newbrain
 
     def mutate(self):
-        mutation_rate = 0.15
+        mutation_rate = 0.05
         for i in range(len(self.keyweights)):
             for j in range(len(self.keyweights[i])):
                 rand = random.random()
