@@ -122,6 +122,11 @@ class AiCar:
             ray.position_at(self.position)
             ray.update_angle(self.angle - oa)
 
+    def createChild(self):
+        child = AiCar(150, 190, 270)
+        child.brain = self.brain.clone()
+        return child
+
 
 if __name__ == '__main__':
     print("Please run racinggame.py as main.")

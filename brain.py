@@ -39,6 +39,21 @@ class Brain:
                 retkeys.append(test)
         return retkeys
 
+    def clone(self):
+        newbrain = Brain()
+        for i in range(len(self.keyweights)):
+            for j in range(len(self.keyweights[i])):
+                newbrain.keyweights[i][j] = self.keyweights[i][j]
+        return newbrain
+
+    def mutate(self):
+        mutation_rate = 0.15
+        for i in range(len(self.keyweights)):
+            for j in range(len(self.keyweights[i])):
+                rand = random.random()
+                if rand < mutation_rate:
+                    self.keyweights[i][j] = random.random()
+
 
 if __name__ == '__main__':
     print("Please run racinggame.py as main.")

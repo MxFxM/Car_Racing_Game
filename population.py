@@ -43,28 +43,32 @@ class Population:
         -------------------------------------------------------------------
         vllt den score hier quadrieren damit besser seutlich besser wird
         wenn dann bei select parent beachten
+        gemacht (hoch 3)
         """
         self.fitnesssum = 0
         for car in self.cars:
-            self.fitnesssum = self.fitnesssum + car.score
+            self.fitnesssum = self.fitnesssum + car.score**3
 
     def selection(self):
         newcars = []
         self.setBestCar()
-        newcars.append(self.cars[self.bestCar].createChild())  # -----
+        newcars.append(self.cars[self.bestCar].createChild())
         newcars[0].isBest = True
-        for _ in range(self.size - 1):
+        for _ in range(self.size - 6):  # 5 cars get made new
             parent = self.selectParent()
-            newcars.append(parent.createChild())  # ------------------
+            newcars.append(parent.createChild())
         self.cars = newcars
+        for _ in range(5):
+            self.cars.append(AiCar(150, 190, 270))  # 5 random cars
         print(f"Generation {self.generation} done @ {time.time()}")
+        print(f"{len(self.cars)} cars alive")
         self.generation = self.generation + 1
         self.step = 0
         self.max_steps = self.max_steps + self.stepsize
 
     def mutation(self):
         for car in self.cars[1:]:  # dont change the previous best
-            car.brain.mutate()  # ------------------------------------
+            car.brain.mutate()
 
     def setBestCar(self):
         best = 0
@@ -80,11 +84,11 @@ class Population:
         rand = random.random() * self.fitnesssum
         runningsum = 0
         for car in self.cars:
-            runningsum = runningsum + car.fitness
+            runningsum = runningsum + car.score**3
             if runningsum >= rand:
                 return car
         # should not be here
-        print("Error when selecting parents. Returning first one randomly.")
+        print("Error when selecting parents. Returning first one (randomly).")
         return self.cars[0]
 
 
