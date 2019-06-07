@@ -69,7 +69,6 @@ class Map:
         self.walls.append(Boundary(214, 319, 200, 200))
 
         self.checkpoints = []
-        self.checkpoints.append(Checkpoint(100, 200, 200, 200, 0))
         self.checkpoints.append(Checkpoint(100, 180, 200, 180, 1))
         self.checkpoints.append(Checkpoint(100, 100, 186, 137, 2))
         self.checkpoints.append(Checkpoint(200, 50, 221, 120, 3))
@@ -97,6 +96,7 @@ class Map:
         self.checkpoints.append(Checkpoint(164, 636, 249, 575, 25))
         self.checkpoints.append(Checkpoint(70, 465, 186, 466, 26))
         self.checkpoints.append(Checkpoint(126, 318, 214, 319, 27))
+        self.checkpoints.append(Checkpoint(100, 200, 200, 200, 28))
 
     def show_walls(self, gs):
         for wall in self.walls:

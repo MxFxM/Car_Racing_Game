@@ -23,7 +23,7 @@ BACKGROUND.fill(BLACK)
 GAME_QUIT = False
 
 mymap = Map()
-test_population = Population(100, 10, 10)
+test_population = Population(100, 20, 50)
 # c = Car(150, 190, 270)
 
 keys = [False, False, False, False]  # up, down, left, right
@@ -40,7 +40,7 @@ while not GAME_QUIT:
         #    pass
 
     mymap.show_walls(GAME_SURFACE)
-    mymap.show_checkpoints(GAME_SURFACE)
+    # mymap.show_checkpoints(GAME_SURFACE)
 
     test_population.update(GAME_SURFACE, mymap.walls, mymap.checkpoints)
     test_population.show(GAME_SURFACE)

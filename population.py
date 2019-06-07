@@ -54,12 +54,10 @@ class Population:
         self.setBestCar()
         newcars.append(self.cars[self.bestCar].createChild())
         newcars[0].isBest = True
-        for _ in range(self.size - 6):  # 5 cars get made new
+        for _ in range(self.size - 1):
             parent = self.selectParent()
             newcars.append(parent.createChild())
         self.cars = newcars
-        for _ in range(5):
-            self.cars.append(AiCar(150, 190, 270))  # 5 random cars
         print(f"Generation {self.generation} done @ {time.time()}")
         print(f"{len(self.cars)} cars alive")
         self.generation = self.generation + 1
