@@ -47,7 +47,7 @@ class Population:
         """
         self.fitnesssum = 0
         for car in self.cars:
-            self.fitnesssum = self.fitnesssum + car.score**3
+            self.fitnesssum = self.fitnesssum + car.score**4
 
     def selection(self):
         newcars = []
@@ -82,7 +82,7 @@ class Population:
         rand = random.random() * self.fitnesssum
         runningsum = 0
         for car in self.cars:
-            runningsum = runningsum + car.score**3
+            runningsum = runningsum + car.score**4
             if runningsum >= rand:
                 return car
         # should not be here
